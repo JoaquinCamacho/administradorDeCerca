@@ -45,7 +45,6 @@ export default {
   },
   methods: {
     async fetchServicios() {
-      // Consultamos los registros de la tabla servicios en Supabase
       const { data, error } = await supabase
         .from('servicios')
         .select('*')
@@ -61,7 +60,6 @@ export default {
 </script>
 
 <style scoped>
-/* Estilo limpio para que los servicios se vean ordenados */
 .badge {
   background: #ebf8ff;
   color: #2b6cb0;

@@ -17,14 +17,14 @@
           <thead>
             <tr>
               <th>ID</th>
-              <th>Cliente (Usuario)</th> <!-- Cambiamos el título aquí -->
+              <th>Cliente (Usuario)</th> 
               <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="cliente in filteredClientes" :key="cliente.id">
               <td>{{ cliente.id }}</td>
-              <!-- Mostramos el nombre y apellido del usuario relacionado en lugar del ID numérico -->
+             
               <td>
                 {{ cliente.Usuarios ? cliente.Usuarios.nombre + ' ' + cliente.Usuarios.apellido : 'Usuario no encontrado' }}
               </td>
@@ -67,7 +67,6 @@ export default {
   },
   methods: {
     async fetchClientes() {
-      // Hacemos el JOIN con la tabla Usuarios usando la relación de Supabase
       const { data, error } = await supabase
         .from('Cliente')
         .select(`

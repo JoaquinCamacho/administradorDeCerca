@@ -37,7 +37,6 @@
               </td>
               <td>{{ cuidador.archivo ?? 'Sin archivo' }}</td>
               <td class="actions">
-                <!-- Usamos id_usuario para borrar todos sus servicios de un solo golpe -->
                 <button class="delete-button" @click="deleteCuidador(cuidador.id_usuario)">Eliminar</button>
               </td>
             </tr>

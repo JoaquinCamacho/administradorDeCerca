@@ -42,7 +42,6 @@
       </div>
     </div>
 
-    <!-- Modal para Crear / Editar Usuario -->
     <div v-if="showModal" class="modal-background" @click.self="closeModal">
       <div class="modal">
         <div class="modal-header">
@@ -76,7 +75,6 @@
             <option :value="2">Cuidador (ID: 2)</option>
           </select>
 
-          <!-- SECCIÓN CONDICIONAL: Si es Cuidador (Rol ID: 2) -->
           <div v-if="form.id_rol === 2" class="services-box" style="margin-top: 15px; background: #f7fafc; padding: 12px; border-radius: 6px;">
             <label style="font-weight: bold; margin-bottom: 8px; display: block;">Servicios que prestará (podés seleccionar varios):</label>
             
@@ -191,7 +189,7 @@ export default {
     },
 
  async saveUser() {
-      console.log('Datos del formulario a guardar:', this.form) // <-- Miremos esto en la consola (F12)
+      console.log('Datos del formulario a guardar:', this.form) 
 
       const datosUsuario = {
         nombre: this.form.nombre,
@@ -214,13 +212,12 @@ export default {
           this.fetchUsers()
         }
       } else {
-        // 1. Creamos el usuario en la tabla Usuarios
         const respuesta = await supabase
           .from('Usuarios')
           .insert([datosUsuario])
           .select()
 
-        console.log('Respuesta de creación de usuario:', respuesta) // <-- Ver qué devuelve Supabase
+        console.log('Respuesta de creación de usuario:', respuesta) 
 
         if (respuesta.error) {
           alert('Error al crear usuario: ' + respuesta.error.message)
@@ -228,16 +225,13 @@ export default {
           const nuevoUsuario = respuesta.data[0]
           console.log('Usuario creado con ID:', nuevoUsuario.id, 'Rol:', nuevoUsuario.id_rol)
 
-          // 2. Si es Cliente (ID: 1)
           if (nuevoUsuario.id_rol === 1) {
             const respCliente = await supabase.from('Cliente').insert([{ id_usuario: nuevoUsuario.id }])
             if (respCliente.error) console.error('Error al crear cliente:', respCliente.error.message)
           } 
-          // 3. Si es Cuidador (ID: 2)
           else if (nuevoUsuario.id_rol === 2) {
             if (this.form.serviciosSeleccionados && this.form.serviciosSeleccionados.length > 0) {
               
-              // Mapeamos cada servicio seleccionado
               const registrosCuidador = this.form.serviciosSeleccionados.map(idServicio => {
                 return {
                   id_usuario: nuevoUsuario.id,
@@ -256,7 +250,6 @@ export default {
                 console.log('¡Cuidadores y servicios guardados con éxito!')
               }
             } else {
-              // Si no marcó ningún servicio
               await supabase.from('Cuidador').insert([{
                 id_usuario: nuevoUsuario.id,
                 id_servicio: null,

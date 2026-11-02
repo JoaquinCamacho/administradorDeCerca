@@ -10,7 +10,6 @@
       </div>
 
       <nav class="nav">
-        <!-- Dashboard / Inicio -->
         <button
           class="nav-item"
           :class="{ active: currentSection === 'dashboard' }"
@@ -20,7 +19,6 @@
           <span>Inicio</span>
         </button>
 
-        <!-- Pestaña Usuarios con Desplegable -->
         <div class="nav-group">
           <button class="nav-item nav-parent" @click="toggleSubmenu">
             <div class="nav-label-box">
@@ -30,7 +28,6 @@
             <span class="arrow-icon">{{ showSubmenu ? '▾' : '▸' }}</span>
           </button>
 
-          <!-- Submenú de Usuarios -->
           <div v-if="showSubmenu" class="submenu">
             <button
               class="submenu-item"
@@ -55,8 +52,6 @@
             </button>
           </div>
         </div>
-
-        <!-- Servicios -->
         <button
           class="nav-item"
           :class="{ active: currentSection === 'servicios' }"
@@ -124,11 +119,10 @@ export default {
     return {
       currentSection: 'dashboard',
       menuOpen: false,
-      showSubmenu: true // Controla si el desplegable está abierto o cerrado
+      showSubmenu: true 
     }
   },
   computed: {
-    // Título dinámico simple en la barra superior
     currentTitle() {
       if (this.currentSection === 'usuarios') return 'Usuarios'
       if (this.currentSection === 'cuidadores') return 'Cuidadores'
@@ -162,7 +156,6 @@ export default {
 </script>
 
 <style scoped>
-/* Estilos adicionales simples para integrar el submenú respetando el tema visual */
 .nav-group {
   display: flex;
   flex-direction: column;

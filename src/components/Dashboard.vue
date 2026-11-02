@@ -97,27 +97,23 @@ export default {
   },
   methods: {
     async cargarEstadisticas() {
-      // 1. Total de Usuarios
       const respUsuarios = await supabase.from('Usuarios').select('*', { count: 'exact' })
       if (!respUsuarios.error) {
         this.totalUsuarios = respUsuarios.count ? respUsuarios.count : 0
-        // Tomamos los últimos 5 usuarios registrados
+  
         this.ultimosUsuarios = respUsuarios.data.slice(-5).reverse()
       }
 
-      // 2. Total de Cuidadores
       const respCuidadores = await supabase.from('Cuidador').select('*', { count: 'exact' })
       if (!respCuidadores.error) {
         this.totalCuidadores = respCuidadores.count ? respCuidadores.count : 0
       }
 
-      // 3. Total de Clientes
       const respClientes = await supabase.from('Cliente').select('*', { count: 'exact' })
       if (!respClientes.error) {
         this.totalClientes = respClientes.count ? respClientes.count : 0
       }
 
-      // 4. Total de Servicios
       const respServicios = await supabase.from('servicios').select('*', { count: 'exact' })
       if (!respServicios.error) {
         this.totalServicios = respServicios.count ? respServicios.count : 0
